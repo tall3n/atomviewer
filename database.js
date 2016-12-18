@@ -6,7 +6,7 @@ MongoClient.connect('mongodb://localhost:27017/AtomScrape', (err, db)=>{
     console.log('Connected to MongoDB server')
     global.db1 = db
 });
-function databaseInsert(name,description,author,downloads,closedb){
+function databaseInsert(name,description,author,downloads,imagename){
 
       console.log(name)
         if (name != ""){
@@ -14,19 +14,20 @@ function databaseInsert(name,description,author,downloads,closedb){
             name:name,
             description:description,
             author:author,
-            downloads:downloads
+            downloads:downloads,
+            imagename:imagename
           },(err, result) => {
             if (err) {
               return console.log('Failed to Insert.', err);
             }
             console.log(JSON.stringify(result.ops,undefined, 2));
-            if (closedb){
-              db1.close()
-            }
           })
 
     }
 
 }
+
+
+
 
 module.exports.databaseInsert = databaseInsert

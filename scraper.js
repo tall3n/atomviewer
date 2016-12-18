@@ -9,7 +9,12 @@ model =
   description: '.css-truncate-target.card-description',
   author: '.author',
   downloads:'.value ',
-  image:'data-canonical-src'
+  image:{
+      selector: '[data-canonical-src]',
+      get:'src',
+      trim:false,
+      unique:true
+    }
 };
 
 var d = require('./database.js');
@@ -21,6 +26,7 @@ var pullPages =  (array) => {
         if (err) {
         return console.error(err);
       }
+      if (data.image != '')
     console.log(data.name)
     d.databaseInsert(data.name,data.description,data.author,data.downloads,data.image)
     });

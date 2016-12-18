@@ -1,8 +1,10 @@
+//DEPRECATED
 const fs = require('fs');
 const request = require('request');
 const cheerio = require('cheerio');
 
 const database = require('./database.js');
+const pi = require('./pullimage.js')
 
 
 
@@ -11,7 +13,7 @@ function pullData(){
     url = `https://atom.io/themes/list?direction=desc&page=${j}&sort=created_at`
     console.log(url);
 
-    var json =  {name : "", description:"", author: "", downloads:""};
+    var json =  {name : "", description:"", author: "", downloads:"",imagename:""};
     var name,description, author, downloads;
 
     request(url, function (error, response, html) {
@@ -37,15 +39,22 @@ function pullData(){
               downloads3 = downloads2.replace(/\s.*/,"");
               json.downloads = downloads3
               console.log('-----------------')
+              //call the pull image function
+              var imagename = pi.pullImage(json.name);
+              json.imagename = imagename;
+
+              return json
+
             }
             //Call Database
             //Method to close db after 60 iterations (Need to find a better way)
-            if (j === 60){
-              var closedb = true
-            }else{
-              var closedb = false
-            }
-            database.databaseInsert(json.name,json.description,json.author,json.downloads,closedb);
+            // if (j === 60){
+            //   var closedb = true
+            // }else{
+            //   var closedb = false
+            // }
+            //
+            // database.databaseInsert(json.name,json.description,json.author,json.downloads,json.imagename,closedb);
       })
     }
     });

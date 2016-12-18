@@ -1,15 +1,28 @@
 // Better way to see atom packages and themes
 var express = require('express');
+var _ = require('lodash');
+
+
+var gn = require('./generatenamearray')
+
+
 var app = express();
 
-var pd = require('./pulldata.js');
 
+//Need to only run this if the data is stale.
+if (false) {
+var scraper = require('./scraper')
+gn.themeNames(1,(err, results) => {
+ if (err){
+   console.log('Ran into error', err)
+ }else{
 
-pd.pullData();
-
-
-
-
+ var namesarray = _.concat(results)
+ scraper.pullPages(namesarray);
+ // fs.appendFile('tes1.out',namesarray);
+}
+});
+}
 
 
 //Urls to store later
