@@ -26,8 +26,6 @@ var pullPages =  (array) => {
         if (err) {
         return console.error(err);
       }
-      if (data.image != '')
-    console.log(data.name)
     d.databaseInsert(data.name,data.description,data.author,data.downloads,data.image)
     });
   })
