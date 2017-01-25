@@ -3,8 +3,9 @@ var express = require('express');
 var _ = require('lodash');
 var hbs = require('hbs');
 
+var scraper = require('./scraper')
 var gn = require('./generatenamearray')
-var d = require('./database')
+// var d = require('./createthemetable')
 
 // var app = express();
 // app.set('view engine', 'hbs');
@@ -17,7 +18,6 @@ var d = require('./database')
 //=======Do something with this later=====//
 //Need to only run this if the data is stale.
 
-var scraper = require('./scraper')
 gn.themeNames(1,(err, results) => {
  if (err){
    console.log('Ran into error', err)

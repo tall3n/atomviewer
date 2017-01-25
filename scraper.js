@@ -17,7 +17,7 @@ model =
     }
 };
 
-var d = require('./database.js');
+var d = require('./createthemetable');
 
 var pullPages =  (array) => {
     _.forEach(array,(value)=> {
